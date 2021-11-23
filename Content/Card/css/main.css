@@ -1,0 +1,325 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e1dcdcd1;
+}
+
+.main-div {
+   border: 2px solid rgb(164, 215, 247);
+   box-shadow: 0px 0px 15px white;
+   margin: 50px auto;
+   width: 35vw;
+   height: 87vh;
+   border-radius: 25px;
+   background-color: white;
+   padding-bottom: 0px;
+   position: relative;
+}
+
+
+.img-container {
+margin-bottom: 15%;
+border-top-right-radius: 25px;
+border-top-left-radius: 25px;
+height: 25%;
+background: rgb(2,0,36);
+background: linear-gradient(145deg, rgba(2,0,300,2) 5%, rgba(9,9,121,1) 51%, rgba(0,221,255,1) 83%)
+}
+
+.back-bgcolor{
+    height: 60%;
+    width: 100%;
+    display: block;
+    }
+.img-container .the-image {
+    margin: 0px auto 10px;
+    border: 1px solid whitesmoke;
+    border-radius: 25px;
+    width: 30%;
+    height: 70%;
+    /*position: relative;
+    top: 50px;*/
+    z-index: 999;
+   /* background-image: url('/img/20017483_1410220829073082_9015793065946953706_o.jpg');*/
+    background-size: cover;
+}
+
+
+.img-container .the-image img {
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 10px;
+}
+
+.content{
+    height: 8%;
+    margin: 5px auto;
+}
+.content h4 {
+    line-height: 50%;
+    text-align: center;
+    text-transform: uppercase;
+    color: grey;
+    margin-bottom: 0px auto;
+    margin-top: 3px;
+    padding: 0px;
+}
+
+.content p {
+    line-height: 50%;
+    margin: 0px auto;
+    padding: 0px;
+    text-align: center;
+    color: lightslategrey;
+}
+
+.social-links {
+    list-style: none;
+    display: inline-flex;
+    margin: 5px auto;
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+    justify-content: center;
+}
+
+.social-links  li{
+    background-color: grey;
+    border-radius: 50%;
+    border: 1px solid grey;
+    margin: 0px 5px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+}
+.social-links  li:hover {
+    background-color: white;
+    border: none;
+}
+.social-links  li i {
+    font-size: 20px;
+    color: white;
+}
+
+.social-links  li:hover .fa-facebook {
+    color: #0b86ee;
+    font-size: 35px;
+}
+.social-links  li:hover .fa-twitter {
+    color: #1d9bf0;
+    font-size: 35px;
+}
+.social-links  li:hover .fa-linkedin {
+    color: #0a66c2;
+    font-size: 35px;
+}
+.social-links  li:hover .fa-instagram {
+    font-size: 35px;
+    color: transparent;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+.social-links  li:hover .fa-youtube {
+    color: #f00;
+    font-size: 35px;
+}
+
+
+.simple-form {
+    margin-top: 20px;
+}
+
+.item  {
+    display: flex;
+    margin-bottom: 15px;
+}
+.item .float-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+.item .float-left span {
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid lightskyblue;
+    margin: 0px 5px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+.item .float-left span i {
+    font-size: 20px;
+    color: white;
+    z-index: 22;
+}
+
+.item .float-left span .fa-phone-square-alt {
+    color: #e91414e0;
+}
+
+.item .float-left span .fa-envelope {
+    color: #0b720b;
+}
+.item .float-left span .fa-globe {
+    color: #2626d3eb;
+}
+.item .float-left span .fa-map-marker-alt {
+    color: #d915d9;
+}
+
+.item .float-right {
+    justify-content: flex-start;
+    width: 80%;
+}
+.item .float-right p {
+    width: 80%;
+    border-radius: 25px;
+    padding: 0px 8px;
+    background-color: white;
+    border: 1px solid lightskyblue;
+    height: 35px;
+    line-height: 34px;
+    margin: 0px;
+    color: lightslategrey;
+}
+.item .float-right p:hover {
+    cursor: normal;
+}
+
+
+.main-div button {
+    position: absolute;
+    bottom: 0px;
+    padding: 10px 0px;
+    color: white;
+    width: 100%;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border:none;
+    background: rgb(2,0,36);
+    background: linear-gradient(145deg, rgba(2,0,300,2) 5%, rgba(9,9,121,1) 51%, rgba(0,221,255,1) 83%);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.main-div button:hover {
+    background: white;
+    color: lightskyblue;
+    border-top: 1px solid lightskyblue;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) 
+{
+	.main-div{
+        width: 80vw;
+    }
+    .img-container {
+        height: 24vh;
+    }
+    .img-container .the-image {
+        width: 30vw;
+    }
+	.content{
+        height: 7%;
+        margin-top: 75px;
+    }
+    .searchDiv input {
+        width: 50vw!important;
+    }
+}
+/* small screen */ 
+@media (min-width: 767px) and (max-width: 991px) 
+{
+    .main-div{
+        width: 60vw;
+    }
+    .img-container {
+        height: 24vh;
+    }
+    .img-container .the-image {
+        width: 20vw;
+    }
+	.content{
+        height: 7%;
+        margin-top: 60px;
+    }
+    .searchDiv input {
+        width: 50vw!important;
+    }
+}
+/* medium screen */
+@media (min-width: 991px) and (max-width: 1199px)
+{
+    .main-div{
+        width: 45vw;
+    }
+    .img-container {
+        height: 24vh;
+    }
+    .img-container .the-image {
+        width: 15vw;
+    }
+	.content{
+        height: 8%;
+        margin-top: 75px;
+    }
+
+}
+/* large screen and xlarge  */ 
+/*
+@media (min-width: 1200px) {
+
+}*/
+
+
+
+/* search page */
+
+.searchDiv {
+    display: flex;
+    justify-content: center;
+    height: 25vh;
+    align-items: center;
+}
+
+.searchDiv input {
+    height: 20%;
+    border-radius: 25px;
+    padding: 10px;
+    background-color: grey;
+    width: 30vw;
+    opacity: 0;
+    display: none;
+}
+
+
+.searchDiv input::placeholder {
+    color: white;
+}
+
+
+
+.goal {
+    display: block!important;
+    opacity: 1!important;
+}
+.nogoal {
+    display: none!important;
+}
+
+
+.searchDiv input:focus {
+    background-color: white;
+    color: grey;
+}

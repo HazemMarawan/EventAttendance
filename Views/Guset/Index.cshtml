@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link rel="stylesheet" href="~/Content/Card/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Card/css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Card/css/main.css" type="text/css" />
+</head>
+<body>
+
+    <div id='mainDiv' class="main-div">
+        <div class="img-container">
+            <div class='back-bgcolor ' style="text-align: center; line-height: 20vh; color: white; font-size: 25px;">
+                IDENTIFIER
+            </div>
+        </div>
+        <form method="get" action="@Url.Action("Search","Guset")">
+            <div class="searchDiv" id='search-div'>
+                <p style="font-size: 20px; color: lightblue; font-weight: bold; text-transform: uppercase;"> hi your search will show now </p>
+                <input required type="text" placeholder="Guset Code" name="code" id="code">
+            </div>
+
+            <input type="submit" value="Search" id="search" name="search" />        
+    
+        </form>
+    </div>
+    <script src="~/Content/Card/js/main.js"></script>
+</body>
+</html>

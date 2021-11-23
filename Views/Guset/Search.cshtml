@@ -1,0 +1,119 @@
+﻿@model EventAttendance.Models.Member
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Card Info</title>
+    <link rel="stylesheet" href="~/Content/Card/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Card/css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Card/css/main.css" type="text/css" />
+</head>
+<body>
+
+    <div id='mainDiv' class="main-div">
+        <div class="img-container">
+            <div class='back-bgcolor'>
+            </div>
+            <div class='the-image'>
+                <img src="@Model.Image" />
+            </div>
+        </div>
+        <div class="content">
+            <h4>
+                @Model.FirstName &nbsp; @Model.LastName
+            </h4>
+            <p>
+                @Model.Code
+            </p>
+        </div>
+
+        @*<ul class="social-links">
+            <li>
+                <a href="#"><i class="fab fa-facebook"></i> </a>
+            </li>
+            <li>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </li>
+            <li>
+                <a href="#"> <i class="fab fa-instagram"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </li>
+        </ul>*@
+
+        <div class="simple-form">
+            <div class="item">
+                <div class="float-left">
+                    <span>
+                        <i class="fas fa-phone-square-alt"></i>
+                    </span>
+                </div>
+                <div class="float-right">
+                    <p>
+                        @Model.Mobile
+                    </p>
+                </div>
+
+            </div>
+            <div class="item">
+                <div class="float-left">
+                    <span>
+                        <i class="far fa-envelope"></i>
+                    </span>
+                </div>
+                <div class="float-right">
+                    <p>
+                        @Model.Email
+                    </p>
+                </div>
+
+            </div>
+            <div class="item">
+                <div class="float-left">
+                    <span>
+                        <i class="fas fa-globe"></i>
+                    </span>
+                </div>
+                <div class="float-right">
+                    <p>
+                        @Model.City
+                    </p>
+                </div>
+
+            </div>
+            <div class="item">
+                <div class="float-left">
+                    <span>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </span>
+                </div>
+                <div class="float-right">
+                    <p>
+                        @Model.StreetAddress
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <a href="@Url.Action("GenerateVCard","Guset",new { code = Model.Code})">
+            Add Contact
+        </a>
+        <a href="@Url.Action("Index","Guset",new { code = Model.Code})">
+            Back
+        </a>
+
+    </div>
+    <script src="~/Content/Card/js/main.js"></script>
+</body>
+</html>
