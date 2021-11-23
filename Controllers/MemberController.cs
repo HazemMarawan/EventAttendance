@@ -84,13 +84,14 @@ namespace EventAttendance.Controllers
                 Member member = AutoMapper.Mapper.Map<MemberViewModel, Member>(memberVM);
 
                 member.created_at = DateTime.Now;
-
-                Guid guid = Guid.NewGuid();
-                var InputFileName = Path.GetFileName(memberVM.Image.FileName);
-                var ServerSavePath = Path.Combine(Server.MapPath("~/Members/Profile/") + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName));
-                memberVM.Image.SaveAs(ServerSavePath);
-                member.Image = "/Members/Profile/" + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName);
-
+                if(memberVM.Image != null)
+                { 
+                    Guid guid = Guid.NewGuid();
+                    var InputFileName = Path.GetFileName(memberVM.Image.FileName);
+                    var ServerSavePath = Path.Combine(Server.MapPath("~/Members/Profile/") + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName));
+                    memberVM.Image.SaveAs(ServerSavePath);
+                    member.Image = "/Members/Profile/" + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName);
+                }
                 db.Members.Add(member);
                 db.SaveChanges();
             }
@@ -113,7 +114,7 @@ namespace EventAttendance.Controllers
                 oldMember.HomePage = memberVM.HomePage;
        
      
-                if (oldMember.Image != null)
+                if (memberVM.Image != null)
                 {
                     Guid guid = Guid.NewGuid();
                     var InputFileName = Path.GetFileName(memberVM.Image.FileName);

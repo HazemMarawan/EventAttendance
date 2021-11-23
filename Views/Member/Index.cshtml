@@ -20,9 +20,9 @@
                 <div class="modal-body">
                     <div class="form-body">
                         <div class="form-row">
-                            <input type="hidden" name="id" id="id" value="0" />
+                            <input type="hidden" name="Id" id="Id" value="0" />
                             <div class="form-group col-md-12">
-                                <center><img src="~/Images/userProfile.png" width="150" height="150" id="imageProfile" class="rounded-circle shadow" alt="" /></center>
+                                <center><img src="~/Images/userProfile.jpeg" width="150" height="150" id="imageProfile" class="rounded-circle shadow" alt="" /></center>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>First Name</label>
@@ -292,17 +292,21 @@
                 }, function (dialog) {
 
 
-                        dialog.find('#Id').val(data.id);
-                        dialog.find('#Code').val(data.full_name);
-                        dialog.find('#FirstName').val(data.full_name);
-                        dialog.find('#LastName').val(data.user_name);
-                        dialog.find('#Organization').val(data.password);
-                        dialog.find('#JobTitle').val(data.code);
-                        dialog.find('#StreetAddress').val(data.email);
-                        dialog.find('#Zip').val(data.phone1);
-                        dialog.find('#City').val(data.address1);
-                        dialog.find('#CountryName').val(data.gender);
-                        dialog.find('#imageProfile').attr('src', data.imagePath);
+                        dialog.find('#Id').val(data.Id);
+                        dialog.find('#Code').val(data.Code);
+                        dialog.find('#FirstName').val(data.FirstName);
+                        dialog.find('#LastName').val(data.LastName);
+                        dialog.find('#Organization').val(data.Organization);
+                        dialog.find('#JobTitle').val(data.JobTitle);
+                        dialog.find('#StreetAddress').val(data.StreetAddress);
+                        dialog.find('#Zip').val(data.Zip);
+                        dialog.find('#City').val(data.City);
+                        dialog.find('#CountryName').val(data.CountryName);
+                        dialog.find('#Phone').val(data.Phone);
+                        dialog.find('#Mobile').val(data.Mobile);
+                        dialog.find('#Email').val(data.Email);
+                        dialog.find('#HomePage').val(data.HomePage);
+                        dialog.find('#imageProfile').attr('src', data.ImagePath);
                         dialog.find('#active option[value=' + data.active + ']').attr('selected', 'selected');
 
 

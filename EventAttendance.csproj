@@ -3462,6 +3462,7 @@
     <Content Include="Files\VCard\b7e8b0f0-0c8b-4114-b609-9eeb9810b1ea_VCard.vcf" />
     <Content Include="Files\VCard\Hazem Marawan_17P10009e1f9647-190e-4ce6-88ef-c881525613b0_VCard.vcf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\factory.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
