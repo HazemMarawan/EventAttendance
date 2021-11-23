@@ -16,13 +16,19 @@ namespace EventAttendance.Controllers
         // GET: Guset
         public ActionResult Index()
         {
+            ViewBag.errorMsg = TempData["errorMsg"];
             return View();
         }
         public ActionResult Search(string Code)
         {
             Member member = db.Members.Where(s => s.Code == Code).FirstOrDefault();
-
-            return View(member);
+            if (member != null)
+                return View(member);
+            else
+            {
+                TempData["errorMsg"] = "Not Found";
+                return RedirectToAction("Index");
+            }
         }
 
         public FileResult GenerateVCard(string Code)

@@ -28,9 +28,13 @@
                 <input required type="text" placeholder="Guset Code" name="code" id="code">
             </div>
 
-            <input type="submit" value="Search" id="search" name="search" />        
-    
+            <input type="submit" value="Search" id="search" name="search" />
+
         </form>
+        @if (ViewBag.errorMsg != null)
+        { 
+            <span style="color:red;">@ViewBag.errorMsg</span>
+        }
     </div>
     <script src="~/Content/Card/js/main.js"></script>
 </body>
