@@ -2,6 +2,13 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -143,6 +150,14 @@
     <Compile Include="Migrations\202111232107548_createDB.cs" />
     <Compile Include="Migrations\202111232107548_createDB.Designer.cs">
       <DependentUpon>202111232107548_createDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111240013151_mig.cs" />
+    <Compile Include="Migrations\202111240013151_mig.Designer.cs">
+      <DependentUpon>202111240013151_mig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111240016246_whatsapp.cs" />
+    <Compile Include="Migrations\202111240016246_whatsapp.Designer.cs">
+      <DependentUpon>202111240016246_whatsapp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EventAttendaceDbContext.cs" />
@@ -3509,6 +3524,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111232107548_createDB.resx">
       <DependentUpon>202111232107548_createDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111240013151_mig.resx">
+      <DependentUpon>202111240013151_mig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111240016246_whatsapp.resx">
+      <DependentUpon>202111240016246_whatsapp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

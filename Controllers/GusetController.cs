@@ -35,7 +35,6 @@ namespace EventAttendance.Controllers
         {
             Member member = db.Members.Where(s => s.Code == Code).FirstOrDefault();
             VCard.VCard myCard = new VCard.VCard
-
             {
                 FirstName = member.FirstName,
                 Organization = member.Organization,
@@ -46,8 +45,12 @@ namespace EventAttendance.Controllers
                 Phone = member.Phone,
                 Mobile = member.Mobile,
                 Email = member.Email,
-                HomePage = member.HomePage
-
+                HomePage = member.HomePage,
+                Whatsapp = member.Whatsapp,
+                Facebook = member.Facebook,
+                Linkedin = member.Linkedin,
+                Insta = member.Insta,
+                Twitter = member.Twitter
             };
             if(!String.IsNullOrEmpty(member.Image))
                 myCard.Image = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~"+ member.Image)));

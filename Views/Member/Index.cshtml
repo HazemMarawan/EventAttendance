@@ -76,6 +76,27 @@
                                 <label>Home Page</label>
                                 <input required name="HomePage" id="HomePage" type="text" class="form-control radius-30" />
                             </div>
+                            @*Social*@
+                            <div class="form-group col-md-6">
+                                <label>Facebook</label>
+                                <input required name="Facebook" id="Facebook" type="text" class="form-control radius-30" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Whatsapp</label>
+                                <input required name="Whatsapp" id="Whatsapp" type="text" class="form-control radius-30" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Linkedin</label>
+                                <input required name="Linkedin" id="Linkedin" type="text" class="form-control radius-30" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Twitter</label>
+                                <input required name="Twitter" id="Twitter" type="text" class="form-control radius-30" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Instagram</label>
+                                <input required name="Insta" id="Insta" type="text" class="form-control radius-30" />
+                            </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -147,6 +168,8 @@
                         <th>Code</th>
                         <th>Mobile</th>
                         <th>Email</th>
+                        <th>Social</th>
+                        <th>QR</th>
                         <th>Active</th>
                         <th></th>
                     </tr>
@@ -204,6 +227,35 @@
                         {
                             "data": "Email",
                             "searchable": true
+                        },
+                        {
+                            "data": "Facebook", "searchable": true,
+                            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                                var html = "<ul>";
+                                if (oData.Facebook)
+                                    html += '<li><span style="font-weight:bold;">Facebook:</span> <a href="' + oData.Facebook + '">' + oData.FirstName + '-Facebook</a></li>';
+                                if (oData.Whatsapp)
+                                    html += '<li><span style="font-weight:bold;">Whatsapp:</span> <a href="' + oData.Whatsapp + '">' + oData.FirstName + '-Whatsapp</a></li>';
+                                if (oData.Linkedin)
+                                    html += '<li><span style="font-weight:bold;">Linkedin:</span> <a href="' + oData.Linkedin + '">' + oData.FirstName + '-Linkedin</a></li>';
+                                if (oData.Insta)
+                                    html += '<li><span style="font-weight:bold;">Insta:</span> <a href="' + oData.Insta + '">' + oData.FirstName + '-Instagram</a></li>';
+                                if (oData.Twitter)
+                                    html += '<li><span style="font-weight:bold;">Twitter:</span> <a href="' + oData.Twitter + '">' + oData.FirstName + '-Twitter</a></li>';
+                                html += "</ul>";
+                                $(nTd).html("<span class='action-column'>" + html + "</span>");
+                            }
+                        },
+                        {
+                            "data": "Code", "searchable": true,
+                            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                                var html = "";
+                                if (oData.Code)
+                                    html += ' <img id="barcode" src="https://api.qrserver.com/v1/create-qr-code/?data=http://65.21.81.196:85/Guset/Search?code=' + oData.Code + '&amp;size=100x100" alt="" title="Member Info" width="100" height="100" />';
+                                else
+                                    html += "<span class='badge badge-danger'>No Code</span>";
+                                $(nTd).html("<span class='action-column'>" + html + "</span>");
+                            }
                         },
                         {
                             "data": "active", "searchable": true,
@@ -291,7 +343,7 @@
 
                 }, function (dialog) {
 
-
+                    console.log(data);
                         dialog.find('#Id').val(data.Id);
                         dialog.find('#Code').val(data.Code);
                         dialog.find('#FirstName').val(data.FirstName);
@@ -305,6 +357,13 @@
                         dialog.find('#Phone').val(data.Phone);
                         dialog.find('#Mobile').val(data.Mobile);
                         dialog.find('#Email').val(data.Email);
+                        //Social
+                        dialog.find('#Facebook').val(data.Facebook);
+                        dialog.find('#Insta').val(data.Insta);
+                        dialog.find('#Linkedin').val(data.Linkedin);
+                        dialog.find('#Whatsapp').val(data.Whatsapp);
+                        dialog.find('#Twitter').val(data.Twitter);
+
                         dialog.find('#HomePage').val(data.HomePage);
                         dialog.find('#imageProfile').attr('src', data.ImagePath);
                         dialog.find('#active option[value=' + data.active + ']').attr('selected', 'selected');

@@ -20,6 +20,11 @@ namespace EventAttendance.VCard
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string HomePage { get; set; }
+        public string Facebook { get; set; }
+        public string Insta { get; set; }
+        public string Twitter { get; set; }
+        public string Linkedin { get; set; }
+        public string Whatsapp { get; set; }
         public byte[] Image { get; set; }
         public override string ToString()
         {
@@ -36,6 +41,12 @@ namespace EventAttendance.VCard
             builder.Append(StreetAddress + ";");
             builder.Append(City + ";;");
             builder.Append(Zip + ";");
+            builder.Append(City + ";;");
+            builder.Append(Facebook + ";");
+            builder.Append(Whatsapp + ";;");
+            builder.Append(Linkedin + ";;");
+            builder.Append(Insta + ";;");
+            builder.Append(Twitter + ";;");
             builder.AppendLine(CountryName);
             // Other data
             builder.AppendLine("ORG:" + Organization);

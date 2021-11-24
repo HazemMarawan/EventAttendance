@@ -48,6 +48,11 @@ namespace EventAttendance.Controllers
                                     HomePage = member.HomePage,
                                     ImagePath = member.Image,
                                     active = member.active,
+                                    Facebook = member.Facebook,
+                                    Insta = member.Insta,
+                                    Twitter = member.Twitter,
+                                    Linkedin = member.Linkedin,
+                                    Whatsapp = member.Whatsapp
                                 });
 
                 //Search    
@@ -112,8 +117,12 @@ namespace EventAttendance.Controllers
                 oldMember.Mobile = memberVM.Mobile;
                 oldMember.Email = memberVM.Email;
                 oldMember.HomePage = memberVM.HomePage;
-       
-     
+                oldMember.Facebook = memberVM.Facebook;
+                oldMember.Twitter = memberVM.Twitter;
+                oldMember.Insta = memberVM.Insta;
+                oldMember.Linkedin = memberVM.Twitter;
+                oldMember.Whatsapp = memberVM.Whatsapp;
+
                 if (memberVM.Image != null)
                 {
                     Guid guid = Guid.NewGuid();
