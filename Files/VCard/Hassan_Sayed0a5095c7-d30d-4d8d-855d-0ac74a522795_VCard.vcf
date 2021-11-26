@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:2.1
+N:;Hassan
+FN:Hassan 
+ADR;HOME;PREF:;;Safir address;Giza;;;Giza;;https://google.com;https://google.com;;https://google.com;;fsa;;https://google.com;;egypt
+ORG:Upagency
+TITLE:Developer
+TEL;HOME;VOICE:1123934941
+TEL;CELL;VOICE:01123934941
+URL;https://google.com
+EMAIL;PREF;INTERNET:prog.hassan.sayed@gmail.com
+END:VCARD
