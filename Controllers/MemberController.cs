@@ -7,10 +7,13 @@ using System.Web.Mvc;
 using EventAttendance.Models;
 using EventAttendance.ViewModel;
 using System.IO;
-
+using EventAttendance.Enum;
+using System.Net.Mail;
+using System.Net;
+using EventAttendance.Helpers;
 namespace EventAttendance.Controllers
 {
-    [CustomAuthenticationFilter]
+    [StaffAuthenticationFilter]
     public class MemberController : Controller
     {
         // GET: Member
@@ -30,10 +33,13 @@ namespace EventAttendance.Controllers
 
                 // Getting all data    
                 var userData = (from member in db.Members
+                                join user in db.Users on member.Id equals user.Id
                                 select new MemberViewModel
                                 {
                                     Id = member.Id,
                                     Code = member.Code,
+                                    Username = user.Username,
+                                    Password = user.Password,
                                     FirstName = member.FirstName,
                                     LastName = member.LastName,
                                     Organization = member.Organization,
@@ -46,8 +52,8 @@ namespace EventAttendance.Controllers
                                     Mobile = member.Mobile,
                                     Email = member.Email,
                                     HomePage = member.HomePage,
-                                    ImagePath = member.Image,
-                                    active = member.active,
+                                    ImagePath = user.Image,
+                                    Active = member.Active,
                                     Facebook = member.Facebook,
                                     Insta = member.Insta,
                                     Twitter = member.Twitter,
@@ -86,25 +92,57 @@ namespace EventAttendance.Controllers
 
             if (memberVM.Id == 0)
             {
-                Member member = AutoMapper.Mapper.Map<MemberViewModel, Member>(memberVM);
+                User user = new User();
+                user.Username = memberVM.Username;
+                user.Password = memberVM.Password;
+                user.Type = (int)UserType.Member;
+                user.CreatedBy = Convert.ToInt32(Session["id"].ToString());
+                user.CreatedAt = DateTime.Now;
+                user.Active = memberVM.Active;
 
-                member.created_at = DateTime.Now;
-                if(memberVM.Image != null)
-                { 
+                if (memberVM.Image != null)
+                {
                     Guid guid = Guid.NewGuid();
                     var InputFileName = Path.GetFileName(memberVM.Image.FileName);
                     var ServerSavePath = Path.Combine(Server.MapPath("~/Members/Profile/") + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName));
                     memberVM.Image.SaveAs(ServerSavePath);
-                    member.Image = "/Members/Profile/" + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName);
+                    user.Image = "/Members/Profile/" + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName);
                 }
+
+
+                db.Users.Add(user);
+                db.SaveChanges();
+
+                Member member = AutoMapper.Mapper.Map<MemberViewModel, Member>(memberVM);
+                member.Id = user.Id;
+                member.CreatedAt = DateTime.Now;
+                member.CreatedBy = Convert.ToInt32(Session["id"].ToString());
+
                 db.Members.Add(member);
                 db.SaveChanges();
+                
+
+                Services.SendMail(memberVM.Email, "Credentials", "Username: " + memberVM.Username + " Password: " + memberVM.Password + " Link: " + Request.Url.Scheme + "://" + Request.Url.Host + ":" + Request.Url.Port + Url.Action("Show", "Profile", new { Code = memberVM.Code }));
+
             }
             else
             {
+                User user = db.Users.Find(memberVM.Id);
+                user.Username = memberVM.Username;
+                user.Password = memberVM.Password;
+
+                if (memberVM.Image != null)
+                {
+                    Guid guid = Guid.NewGuid();
+                    var InputFileName = Path.GetFileName(memberVM.Image.FileName);
+                    var ServerSavePath = Path.Combine(Server.MapPath("~/Members/Profile/") + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName));
+                    memberVM.Image.SaveAs(ServerSavePath);
+                    user.Image = "/Members/Profile/" + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName);
+                }
+
+                db.SaveChanges();
 
                 Member oldMember = db.Members.Find(memberVM.Id);
-
                 oldMember.FirstName = memberVM.FirstName;
                 oldMember.LastName = memberVM.LastName;
                 oldMember.Organization = memberVM.Organization;
@@ -122,17 +160,9 @@ namespace EventAttendance.Controllers
                 oldMember.Insta = memberVM.Insta;
                 oldMember.Linkedin = memberVM.Twitter;
                 oldMember.Whatsapp = memberVM.Whatsapp;
+                oldMember.UpdatedAt = DateTime.Now;
+                oldMember.Active = memberVM.Active;
 
-                if (memberVM.Image != null)
-                {
-                    Guid guid = Guid.NewGuid();
-                    var InputFileName = Path.GetFileName(memberVM.Image.FileName);
-                    var ServerSavePath = Path.Combine(Server.MapPath("~/Members/Profile/") + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName));
-                    memberVM.Image.SaveAs(ServerSavePath);
-                    oldMember.Image = "/Members/Profile/" + guid.ToString() + "_Profile" + Path.GetExtension(memberVM.Image.FileName);
-                }
-                oldMember.updated_at = DateTime.Now;
-                db.Entry(oldMember).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
 

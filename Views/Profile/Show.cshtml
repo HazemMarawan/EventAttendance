@@ -1,4 +1,4 @@
-﻿@model EventAttendance.Models.Member
+﻿@model EventAttendance.ViewModel.MemberViewModel
 @{
     Layout = null;
 }
@@ -21,7 +21,7 @@
             <div class='back-bgcolor'>
             </div>
             <div class='the-image'>
-                <img src="@Model.Image" />
+                <img src="@Model.ImagePath" />
             </div>
         </div>
         <div class="content">
@@ -106,10 +106,10 @@
             </div>
         </div>
 
-        <a href="@Url.Action("GenerateVCard","Guset",new { code = Model.Code})">
+        <a href="@Url.Action("GenerateVCard","Profile",new { code = Model.Code})">
             Add Contact
         </a>
-        <a href="@Url.Action("Index","Guset")">
+        <a href="@Url.Action("Search","Profile")">
             Back
         </a>
 

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EventAttendance.Models
+namespace EventAttendance.ViewModel
 {
-    public class User
+    public class UserViewModel
     {
-        [Key]
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -17,7 +15,5 @@ namespace EventAttendance.Models
         public int? Active { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? CreatedAt { get; set; }
-
-        public virtual Member Member { get; set; }
     }
 }

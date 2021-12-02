@@ -3,37 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using EventAttendance.Enum;
 using EventAttendance.Models;
+using EventAttendance.ViewModel;
+using EventAttendance.Enum;
+
 namespace EventAttendance.Controllers
 {
-    public class AccountController : Controller
+    public class ExternalAccountController : Controller
     {
         EventAttendaceDbContext db = new EventAttendaceDbContext();
-        // GET: Account
-        public ActionResult Login()
+        // GET: Guest
+        public ActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(UserViewModel user)
         {
-            User currentUser = db.Users.Where(s => s.Username == user.Username && s.Password == user.Password && s.Active == 1 && s.Type == (int)UserType.Staff).FirstOrDefault();
+            User currentUser = db.Users.Where(s => s.Username == user.Username && s.Password == user.Password && s.Active == 1 && s.Type == (int)UserType.Member).FirstOrDefault();
             if (currentUser != null)
             {
                 Session["user_name"] = currentUser.Username;
                 Session["id"] = currentUser.Id;
                 Session["user"] = currentUser;
                 Session["type"] = currentUser.Type;
-                return RedirectToAction("Index", "Dashboard");
+                Session["code"] = db.Members.Find(currentUser.Id).Code;
+                return RedirectToAction("Profile", "Guest");
             }
             return View();
-        }
-        public ActionResult Logout()
-        {
-            Session.Clear();
-            Session.Abandon();
-            return RedirectToAction("Login");
         }
     }
 }

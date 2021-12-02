@@ -2,13 +2,6 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
-    <ItemGroup>
-      <RoslynFiles Include="$(CscToolPath)\*" />
-    </ItemGroup>
-    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
-    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
-  </Target>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -138,26 +131,46 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Auth\CustomAuthenticationFilter.cs" />
+    <Compile Include="Auth\GuestAuthenticationFilter.cs" />
+    <Compile Include="Auth\StaffAuthenticationFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\GusetController.cs" />
+    <Compile Include="Controllers\ExternalAccountController.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Enum\Enums.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Services.cs" />
     <Compile Include="Migrations\202111232107548_createDB.cs" />
     <Compile Include="Migrations\202111232107548_createDB.Designer.cs">
       <DependentUpon>202111232107548_createDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111240013151_mig.cs" />
-    <Compile Include="Migrations\202111240013151_mig.Designer.cs">
-      <DependentUpon>202111240013151_mig.cs</DependentUpon>
+    <Compile Include="Migrations\202112012323078_updateTables.cs" />
+    <Compile Include="Migrations\202112012323078_updateTables.Designer.cs">
+      <DependentUpon>202112012323078_updateTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111240016246_whatsapp.cs" />
-    <Compile Include="Migrations\202111240016246_whatsapp.Designer.cs">
-      <DependentUpon>202111240016246_whatsapp.cs</DependentUpon>
+    <Compile Include="Migrations\202112012330155_updateTables1.cs" />
+    <Compile Include="Migrations\202112012330155_updateTables1.Designer.cs">
+      <DependentUpon>202112012330155_updateTables1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112012336273_updateTables2.cs" />
+    <Compile Include="Migrations\202112012336273_updateTables2.Designer.cs">
+      <DependentUpon>202112012336273_updateTables2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112012339210_updateTables3.cs" />
+    <Compile Include="Migrations\202112012339210_updateTables3.Designer.cs">
+      <DependentUpon>202112012339210_updateTables3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112012341007_updateTables4.cs" />
+    <Compile Include="Migrations\202112012341007_updateTables4.Designer.cs">
+      <DependentUpon>202112012341007_updateTables4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112012344326_updateTables5.cs" />
+    <Compile Include="Migrations\202112012344326_updateTables5.Designer.cs">
+      <DependentUpon>202112012344326_updateTables5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EventAttendaceDbContext.cs" />
@@ -166,6 +179,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VCard\VCard.cs" />
     <Compile Include="ViewModel\MemberViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminPanelAssets\assets\css\apps\contacts.css" />
@@ -3111,6 +3125,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\userProfile.jpeg" />
     <Content Include="Members\Profile\d842c31e-2360-4226-8cd3-bba6edbdbda5_Profile.jpeg" />
     <Content Include="Members\Profile\f064815a-18ed-4dc6-8481-6a90219353dd_Profile.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -3502,8 +3517,10 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
-    <Content Include="Views\Guset\Index.cshtml" />
-    <Content Include="Views\Guset\Search.cshtml" />
+    <Content Include="Views\Profile\Search.cshtml" />
+    <Content Include="Views\Profile\Show.cshtml" />
+    <Content Include="Views\ExternalAccount\Index.cshtml" />
+    <Content Include="Views\Guest\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3525,11 +3542,23 @@
     <EmbeddedResource Include="Migrations\202111232107548_createDB.resx">
       <DependentUpon>202111232107548_createDB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111240013151_mig.resx">
-      <DependentUpon>202111240013151_mig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112012323078_updateTables.resx">
+      <DependentUpon>202112012323078_updateTables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111240016246_whatsapp.resx">
-      <DependentUpon>202111240016246_whatsapp.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112012330155_updateTables1.resx">
+      <DependentUpon>202112012330155_updateTables1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112012336273_updateTables2.resx">
+      <DependentUpon>202112012336273_updateTables2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112012339210_updateTables3.resx">
+      <DependentUpon>202112012339210_updateTables3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112012341007_updateTables4.resx">
+      <DependentUpon>202112012341007_updateTables4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112012344326_updateTables5.resx">
+      <DependentUpon>202112012344326_updateTables5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

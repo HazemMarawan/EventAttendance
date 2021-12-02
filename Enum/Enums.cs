@@ -10,4 +10,9 @@ namespace EventAttendance.Enum
         Male = 1,
         Female = 2,
     }
+    public enum UserType
+    {
+        Staff = 1,
+        Member = 2,
+    }
 }

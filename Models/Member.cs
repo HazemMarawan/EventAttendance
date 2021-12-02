@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,7 +9,8 @@ namespace EventAttendance.Models
 {
     public class Member
     {
-        [Key]
+        [Key, ForeignKey("User")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public string Code { get; set; }
         public string FirstName { get; set; }
@@ -23,18 +25,19 @@ namespace EventAttendance.Models
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string HomePage { get; set; }
-        public string Image { get; set; }
         public string Facebook { get; set; }
         public string Insta { get; set; }
         public string Twitter { get; set; }
         public string Linkedin { get; set; }
         public string Whatsapp { get; set; }
-        public int? active { get; set; }
-        public int? created_by { get; set; }
-        public int? updated_by { get; set; }
-        public int? deleted_by { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-        public DateTime? deleted_at { get; set; }
+        public int? Active { get; set; }
+        public int? CreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+        public int? DeletedBy { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeleteAt { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

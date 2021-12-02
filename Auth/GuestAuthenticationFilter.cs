@@ -9,11 +9,11 @@ using System.Web.Routing;
 
 namespace EventAttendance.Auth
 {
-    public class CustomAuthenticationFilter : ActionFilterAttribute, IAuthenticationFilter
+    public class GuestAuthenticationFilter : ActionFilterAttribute, IAuthenticationFilter
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            if (string.IsNullOrEmpty(Convert.ToString(filterContext.HttpContext.Session["user_name"]))&& filterContext.ActionDescriptor.ActionName!="Login")
+            if ((string.IsNullOrEmpty(Convert.ToString(filterContext.HttpContext.Session["user_name"])) || Convert.ToInt32(Convert.ToString(filterContext.HttpContext.Session["type"])) == 1) &&filterContext.ActionDescriptor.ActionName!="Login")
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
@@ -26,8 +26,8 @@ namespace EventAttendance.Auth
                 filterContext.Result = new RedirectToRouteResult(
                new RouteValueDictionary
                {
-                    { "controller", "Account" },
-                    { "action", "Login" }
+                    { "controller", "ExternalAccount" },
+                    { "action", "Index" }
                });
             }
         }
