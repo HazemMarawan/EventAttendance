@@ -31,7 +31,7 @@ namespace EventAttendance.Controllers
                 Session["code"] = db.Members.Find(currentUser.Id).Code;
                 return RedirectToAction("Profile", "Guest");
             }
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

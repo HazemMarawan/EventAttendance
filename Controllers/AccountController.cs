@@ -27,7 +27,7 @@ namespace EventAttendance.Controllers
                 Session["type"] = currentUser.Type;
                 return RedirectToAction("Index", "Dashboard");
             }
-            return View();
+            return RedirectToAction("Login");
         }
         public ActionResult Logout()
         {
