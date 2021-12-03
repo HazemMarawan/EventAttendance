@@ -80,7 +80,7 @@ namespace EventAttendance.Controllers
         }
         public JsonResult checkUsername(string Username)
         {
-            if(db.Users.Any(s=>s.Username == Username))
+            if(db.Users.Any(s=>s.Username == Username) || String.IsNullOrEmpty(Username))
                 return Json(new { Valid = false }, JsonRequestBehavior.AllowGet);
             else
                 return Json(new { Valid = true }, JsonRequestBehavior.AllowGet);
