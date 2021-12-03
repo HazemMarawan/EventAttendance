@@ -324,7 +324,7 @@ signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
         $(document).ready(function () {
-            $("#Username").val(" ");
+            $("#Username").val("");
             $(document).on("keyup", "#Username", function () {
                 var Username = $("#Username").val();
                 $.ajax({
