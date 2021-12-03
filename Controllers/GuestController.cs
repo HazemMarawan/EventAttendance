@@ -73,6 +73,7 @@ namespace EventAttendance.Controllers
                 Member oldMember = db.Members.Find(memberVM.Id);
                 oldMember.FirstName = memberVM.FirstName;
                 oldMember.LastName = memberVM.LastName;
+                oldMember.Code = memberVM.Code;
                 oldMember.Organization = memberVM.Organization;
                 oldMember.JobTitle = memberVM.JobTitle;
                 oldMember.StreetAddress = memberVM.StreetAddress;
