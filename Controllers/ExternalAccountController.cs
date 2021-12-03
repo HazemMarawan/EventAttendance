@@ -63,6 +63,7 @@ namespace EventAttendance.Controllers
             db.SaveChanges();
 
             Member member = AutoMapper.Mapper.Map<MemberViewModel, Member>(memberVM);
+            member.Code = Guid.NewGuid().ToString().Replace("-",String.Empty);
             member.Id = user.Id;
             member.CreatedAt = DateTime.Now;
             member.CreatedBy = user.Id;
